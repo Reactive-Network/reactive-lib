@@ -20,6 +20,7 @@ abstract contract AbstractReactive is IReactive, AbstractPayer {
 
     constructor() {
         vendor = service = SERVICE_ADDR;
+        addAuthorizedSender(address(SERVICE_ADDR));
         detectVm();
     }
 

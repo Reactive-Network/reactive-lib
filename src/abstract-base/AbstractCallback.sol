@@ -11,6 +11,7 @@ abstract contract AbstractCallback is AbstractPayer {
     constructor(address _callback_sender) {
         rvm_id = msg.sender;
         vendor = IPayable(payable(_callback_sender));
+        addAuthorizedSender(_callback_sender);
     }
 
     modifier rvmIdOnly(address _rvm_id) {

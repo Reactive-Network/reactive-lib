@@ -24,6 +24,9 @@ interface IReactive is IPayer {
     // @param data Event data as a byte array.
     // @param block_number Block number where the log record is located in its chain of origin.
     // @param op_code Number of topics in the log record (0 to 4).
+    // @param origin_block_hash Origin block hash associated with the log record.
+    // @param origin_tx_hash Origin transaction hash associated with the log record.
+    // @param log_index Received log record's index.
     function react(
         uint256 chain_id,
         address _contract,
@@ -33,6 +36,9 @@ interface IReactive is IPayer {
         uint256 topic_3,
         bytes calldata data,
         uint256 block_number,
-        uint256 op_code
+        uint256 op_code,
+        uint256 origin_block_hash,
+        uint256 origin_tx_hash,
+        uint256 log_index
     ) external;
 }

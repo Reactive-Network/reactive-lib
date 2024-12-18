@@ -8,6 +8,8 @@ import '../interfaces/IPayable.sol';
 abstract contract AbstractPayer is IPayer {
     IPayable internal vendor;
 
+    mapping(address => bool) senders;
+
     constructor() {
     }
 
@@ -15,7 +17,7 @@ abstract contract AbstractPayer is IPayer {
     }
 
     modifier authorizedSenderOnly() {
-        require(address(vendor) == address(0) || msg.sender == address(vendor), 'Authorized sender only');
+        require(senders[msg.sender], 'Authorized sender only');
         _;
     }
 
@@ -34,5 +36,12 @@ abstract contract AbstractPayer is IPayer {
             (bool success,) = payable(recipient).call{value: amount}(new bytes(0));
             require(success, 'Transfer failed');
         }
+    }
+
+    function addAuthorizedSender(address sender) internal {
+        senders[sender] = true;
+    }
+    function removeAuthorizedSender(address sender) internal {
+        senders[sender] = false;
     }
 }

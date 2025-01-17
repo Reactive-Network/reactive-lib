@@ -3,7 +3,6 @@
 pragma solidity >=0.8.0;
 
 import '../interfaces/IReactive.sol';
-import '../interfaces/IPayable.sol';
 import '../interfaces/ISystemContract.sol';
 import './AbstractPayer.sol';
 

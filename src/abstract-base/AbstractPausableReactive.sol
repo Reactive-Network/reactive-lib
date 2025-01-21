@@ -3,7 +3,6 @@
 pragma solidity >=0.8.0;
 
 import '../interfaces/IReactive.sol';
-import '../interfaces/ISubscriptionService.sol';
 import './AbstractReactive.sol';
 
 abstract contract AbstractPausableReactive is IReactive, AbstractReactive {

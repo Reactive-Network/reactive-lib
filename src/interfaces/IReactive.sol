@@ -4,8 +4,8 @@ pragma solidity >=0.8.0;
 
 import './IPayer.sol';
 
-// @title Interface for reactive contracts.
-// @notice Reactive contracts receive notifications about new events matching the criteria of their event subscriptions.
+/// @title Interface for reactive contracts.
+/// @notice Reactive contracts receive notifications about new events matching the criteria of their event subscriptions.
 interface IReactive is IPayer {
     struct LogRecord {
         uint256 chain_id;
@@ -29,6 +29,7 @@ interface IReactive is IPayer {
         bytes payload
     );
 
-    // @notice Entry point for handling new event notifications.
+    /// @notice Entry point for handling new event notifications.
+    /// @param log Data structure containing the information about the intercepted log record.
     function react(LogRecord calldata log) external;
 }

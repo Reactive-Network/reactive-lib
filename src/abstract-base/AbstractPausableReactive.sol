@@ -5,6 +5,7 @@ pragma solidity >=0.8.0;
 import '../interfaces/IReactive.sol';
 import './AbstractReactive.sol';
 
+/// @title Abstract base contract for pausable reactive contracts.
 abstract contract AbstractPausableReactive is IReactive, AbstractReactive {
     struct Subscription{
         uint256 chain_id;
@@ -22,6 +23,8 @@ abstract contract AbstractPausableReactive is IReactive, AbstractReactive {
         owner = msg.sender;
     }
 
+    /// @notice This function should return the list of subscriptions to pause/resume.
+    /// @return The list of subscriptions to pause/resume.
     function getPausableSubscriptions() virtual internal view returns (Subscription[] memory);
 
     modifier onlyOwner() {
@@ -29,6 +32,7 @@ abstract contract AbstractPausableReactive is IReactive, AbstractReactive {
         _;
     }
 
+    /// @notice Pauses the reactive contract by unsubscribing from events using the criteria provided by the implementation.
     function pause() external rnOnly onlyOwner {
         require(!paused, 'Already paused');
         Subscription[] memory subscriptions = getPausableSubscriptions();
@@ -45,6 +49,7 @@ abstract contract AbstractPausableReactive is IReactive, AbstractReactive {
         paused = true;
     }
 
+    /// @notice Resumed the reactive contract by subscribing to events using the criteria provided by the implementation.
     function resume() external rnOnly onlyOwner {
         require(paused, 'Not paused');
         Subscription[] memory subscriptions = getPausableSubscriptions();

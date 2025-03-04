@@ -16,7 +16,7 @@ abstract contract AbstractCallback is AbstractPayer {
     }
 
     modifier rvmIdOnly(address _rvm_id) {
-        require(rvm_id == address(0) || rvm_id == _rvm_id, 'Authorized RVM ID only');
+        require(rvm_id == _rvm_id, 'Authorized RVM ID only');
         _;
     }
 }
